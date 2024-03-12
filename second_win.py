@@ -1,8 +1,8 @@
-from PyQt5.QtWidgets import QWidget, QApplication, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QLineEdit
+from PyQt5.QtWidgets import QWidget, QApplication, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QLineEdit, QMessageBox
 from PyQt5.QtCore import Qt, QTime, QTimer
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QIntValidator
 from instr import *
-from final_win import *
+from final_win import FinalWin
 
 class Experiment():
     def __init__(self, age, test1, test2, test3):
@@ -48,6 +48,12 @@ class TestWin(QWidget):
         self.finalTestInput1 = QLineEdit(txt_hinttest2)
         self.finalTestInput2 = QLineEdit(txt_hinttest3)
 
+        #inputvalidation
+        self.yearsInput.setValidator(QIntValidator(0, 100))
+        self.firstTestInput.setValidator(QIntValidator(0, 100))
+        self.finalTestInput1.setValidator(QIntValidator(0, 100))
+        self.finalTestInput2.setValidator(QIntValidator(0, 100))
+
         #layout
         self.h_line = QHBoxLayout()
         self.l_line = QVBoxLayout()
@@ -83,9 +89,28 @@ class TestWin(QWidget):
         self.finalTestButton.clicked.connect(self.timer_final)
     
     def send_click(self):
+        if self.inputBlankCheck() == True:
+            return
+        
         self.hide()
         self.exp = Experiment(self.yearsInput.text(),self.firstTestInput.text(),self.finalTestInput1.text(),self.finalTestInput2.text())
         self.tw = FinalWin(self.exp)
+
+    def inputBlankCheck(self):
+        if self.yearsInput.text() == '':
+            QMessageBox.warning(self, "Error", "usia tidak boleh kosong!")
+            return True
+        elif self.firstTestInput.text() == '':
+            QMessageBox.warning(self, "Error", "tes awal tidak boleh kosong!")
+            return True
+        elif self.finalTestInput1.text() == '':
+            QMessageBox.warning(self, "Error", "tes akhir 1 tidak boleh kosong!")
+            return True
+        elif self.finalTestInput2.text() == '':
+            QMessageBox.warning(self, "Error", "tes akhir 2 tidak boleh kosong!")
+            return True
+        else:
+            return False
 
     def timer_test(self):
         global time

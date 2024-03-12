@@ -40,7 +40,7 @@ class FinalWin(QWidget):
             else:
                 return txt_res5
 
-        if self.exp.age == 9 or self.exp.age == 10:
+        elif self.exp.age == 9 or self.exp.age == 10:
             if self.index >= 19.5:
                 return txt_res1
             elif self.index >= 15.5 and self.index < 19.5:
@@ -52,7 +52,7 @@ class FinalWin(QWidget):
             else:
                 return txt_res5
 
-        if self.exp.age == 11 or self.exp.age == 12:
+        elif self.exp.age == 11 or self.exp.age == 12:
             if self.index >= 18:
                 return txt_res1
             elif self.index >= 14 and self.index < 18:
@@ -64,7 +64,7 @@ class FinalWin(QWidget):
             else:
                 return txt_res5
 
-        if self.exp.age == 13 or self.exp.age == 14:
+        elif self.exp.age == 13 or self.exp.age == 14:
             if self.index >= 16.5:
                 return txt_res1
             elif self.index >= 12.5 and self.index < 16.5:
@@ -76,7 +76,7 @@ class FinalWin(QWidget):
             else:
                 return txt_res5
 
-        if self.exp.age >= 15:
+        elif self.exp.age >= 15:
             if self.index >= 15:
                 return txt_res1
             elif self.index >= 11 and self.index < 15:
@@ -87,3 +87,6 @@ class FinalWin(QWidget):
                 return txt_res4
             else:
                 return txt_res5
+        else:
+            return 'no data'
+        
